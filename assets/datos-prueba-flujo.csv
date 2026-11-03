@@ -1,0 +1,5 @@
+TipoSolicitud,Aplicacion,Justificacion,CorreoJefe,Solicitante,Estado
+Acceso a herramienta,Portal BI Corporativo,Elaborar reportes mensuales de cartera para el comité,jefe.area@contoso.com,Participante de prueba,Registrada
+Acceso a herramienta,TesoNet (Tesorería),Conciliación diaria de operaciones de tesorería,jefe.tesoreria@contoso.com,Participante de prueba,Pendiente de autorización
+Habilitación de permisos,Gestor Documental - Edición,Actualizar plantillas del área de riesgos,jefe.riesgos@contoso.com,Participante de prueba,Registrada
+Requerimiento tecnológico,No aplica,Instalación de software de diagramación autorizado,jefe.procesos@contoso.com,Participante de prueba,Registrada

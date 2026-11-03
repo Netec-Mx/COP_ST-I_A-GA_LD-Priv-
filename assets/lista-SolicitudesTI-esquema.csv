@@ -1,0 +1,8 @@
+NombreColumna,Tipo,Obligatoria,Descripcion
+Title,Una línea de texto,Sí,Resumen generado por el flujo (TipoSolicitud - Aplicacion)
+TipoSolicitud,Una línea de texto,Sí,Acceso a herramienta | Habilitación de permisos | Requerimiento tecnológico
+Aplicacion,Una línea de texto,No,Aplicación o recurso; incluye el nivel de permiso cuando aplica
+Justificacion,Varias líneas de texto,Sí,Motivo de negocio de la solicitud
+CorreoJefe,Una línea de texto,Sí,Correo del jefe inmediato (ficticio)
+Solicitante,Una línea de texto,Sí,Nombre del usuario del agente
+Estado,Una línea de texto,Sí,Registrada | Pendiente de autorización

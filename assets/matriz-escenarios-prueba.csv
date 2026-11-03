@@ -1,0 +1,7 @@
+Escenario,Descripcion,EntradaEjemplo,ResultadoEsperado,Practica,ResultadoObtenido,AjusteRealizado
+1,Consulta informativa,¿Qué necesito para pedir acceso al Portal BI Corporativo?,Responde requisitos con cita y no inicia el registro,4 y 7,,
+2,Solicitud completa,Acceso a herramienta · Portal BI Corporativo · datos completos · confirma Sí,Registra con ID y estado Registrada,3 6 y 7,,
+3,Solicitud incompleta,Acceso a herramienta sin correo válido del jefe,Ruta incompleta sin invocar la herramienta,3 y 7,,
+4,Sujeta a autorización,TesoNet o permiso de Administración · confirma Sí,Registra con estado Pendiente de autorización,3 6 y 7,,
+5,Usuario no confirma,Responde No en la confirmación,No crea ningún elemento,6 y 7,,
+6,Error en el registro,Lista inexistente configurada temporalmente en el flujo,Mensaje de error controlado sin detalles técnicos,7,,
