@@ -16,6 +16,17 @@ En esta práctica creas un flujo de agente que recibe los datos de una solicitud
 
 Después pruebas el flujo de forma independiente, con datos de ejemplo, para verificar que los registros se crean correctamente y que se devuelve la información esperada. En la Práctica 6 conectarás este flujo al tema de solicitud.
 
+Nota de compatibilidad de interfaz: Copilot Studio puede mostrar los menús con nombres ligeramente diferentes según la versión del tenant. Si la interfaz no coincide exactamente con los pasos, usa la opción equivalente en tu entorno (por ejemplo: Agentes/Agents, Configuración/Settings, Temas/Topics, Herramientas/Tools y Panel de prueba/Test pane). La lógica de la práctica sigue siendo la misma.
+
+### Antes de iniciar la práctica: verificar el entorno
+
+1. Abre [Copilot Studio](https://copilotstudio.microsoft.com) e inicia sesión con la cuenta del curso.
+2. Abre el selector de entorno en la barra superior (normalmente en la esquina superior derecha) y selecciona exactamente `Laboratorio Copilot Studio - <tus iniciales>`, reemplazando el marcador por tus iniciales.
+3. Antes de crear el flujo de agente, confirma que ese nombre permanece visible en el selector.
+4. Si el diseñador abre Power Automate, verifica también que su selector de entorno muestre `Laboratorio Copilot Studio - <tus iniciales>` antes de crear o editar el flujo.
+
+**Si el entorno no aparece o no puedes seleccionarlo, detente y contacta al instructor o a TI. No continúes en el entorno predeterminado, personal o de producción.**
+
 ## Objetivos de Aprendizaje
 
 - [ ] Crear un flujo de agente con el desencadenador «Cuando un agente llama al flujo».
