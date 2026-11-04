@@ -74,12 +74,14 @@ La guía no exige conectores Premium, AI Builder, orquestación generativa, Powe
 Antes del curso, TI debe confirmar para cada participante:
 
 - Cuenta organizacional Microsoft Entra ID en el tenant de capacitación.
-- Licencia o capacidad de Microsoft Copilot Studio suficiente para crear y probar agentes y flujos de agente. Iniciar sesión en Microsoft 365 no basta.
+- Derechos de Copilot Studio asignados por el curso o una prueba habilitada por el tenant. La prueba de producto permite crear y probar agentes, pero no publicarlos; verificar por separado que las prácticas de flujos, conexiones y SharePoint estén habilitadas. Iniciar sesión en Microsoft 365 no basta.
 - Derechos para crear y ejecutar flujos de nube con conectores estándar.
 - Acceso a SharePoint Online con permisos sobre el sitio de laboratorio.
 - MFA y requisitos de dispositivo satisfechos, si los exige el tenant.
 
 El administrador debe verificar el conjunto real de licencias y capacidad asignadas, no solo el nombre comercial de una suscripción. Consultar los [requisitos de licencias de Copilot Studio](https://learn.microsoft.com/es-es/microsoft-copilot-studio/requirements-licensing-subscriptions).
+
+Para una práctica individual, se puede crear un entorno Power Platform con **Tipo: Prueba** y Dataverse, como se describe en la sección 1, si la organización permite la creación y se tienen los permisos requeridos. La prueba de producto de Copilot Studio es distinta: permite crear y probar agentes, pero no publicarlos. Ninguna de las dos opciones garantiza por sí sola el acceso a SharePoint, las conexiones o las directivas de datos requeridas por el curso. Consulta el [Paso 1 del Capítulo 1](Capitulo01/README.md#paso-1-crear-o-seleccionar-el-entorno-prueba-y-abrir-copilot-studio), [Acerca de los entornos de prueba](https://learn.microsoft.com/es-es/power-platform/admin/trial-environments) y [Obtener acceso a Copilot Studio](https://learn.microsoft.com/es-es/microsoft-copilot-studio/requirements-licensing-subscriptions).
 
 ## Matriz de permisos
 
@@ -106,29 +108,75 @@ Confirmar que las directivas de datos (DLP) del entorno permiten combinar estos 
 
 # Instalación y Configuración
 
-## 1. Preparar el acceso web
+## 1. Crear o recibir el entorno de Power Platform
+
+Completa esta preparación **antes del taller**. El entorno de Power Platform es donde se crean el agente y los componentes; la prueba de Copilot Studio por sí sola no crea necesariamente el entorno que necesita el curso.
+
+### Opción A: crear un entorno de tipo Prueba con Dataverse
+
+Usa esta opción si tienes permisos de administrador de Power Platform o Dynamics 365, el tenant permite crear entornos y el instructor autoriza entornos individuales. Si no tienes esos permisos, pide a TI o al instructor que realice estos pasos o te asigne un entorno:
+
+1. Abre el [Centro de administración de Power Platform](https://admin.powerplatform.microsoft.com) e inicia sesión con tu cuenta organizacional.
+2. En la navegación, abre **Administrar > Entornos** y selecciona **Nuevo**.
+3. En los datos iniciales del entorno, completa:
+
+   | Campo | Valor recomendado |
+   |---|---|
+   | Nombre | `Laboratorio Copilot Studio - <tus iniciales>` |
+   | Región | La indicada por el instructor; todos los recursos del curso deben usar una región autorizada. |
+   | Tipo | **Prueba**. No selecciones **Prueba (basada en suscripción)**, **Producción**, **Desarrollador** ni **Sandbox**. |
+   | Propósito | `Entorno temporal para el curso de Copilot Studio` |
+   | Agregar un almacén de datos de Dataverse | **Sí**. La selección de Dataverse no se puede deshacer. |
+   | Pago por uso con Azure | **No**, salvo que TI autorice expresamente vincular una suscripción. |
+
+4. Selecciona **Siguiente** y configura la base de datos:
+
+   | Campo | Valor recomendado |
+   |---|---|
+   | Idioma | Español, según la opción regional disponible para el curso. |
+   | Dirección URL | Un identificador único, por ejemplo `labcopilot-<tus iniciales>`. |
+   | Divisa | La indicada por el instructor; esta configuración es para informes. |
+   | Habilitar aplicaciones de Dynamics 365 | **No**. Las aplicaciones de Dynamics 365 no están disponibles en entornos de tipo Prueba. |
+   | Aplicaciones y datos de ejemplo | No los agregues; el curso usa recursos ficticios propios. |
+   | Grupo de seguridad | El grupo asignado por TI/instructor. Si el entorno debe estar abierto a todos los usuarios autorizados del tenant, elige **Ninguno** únicamente con autorización del instructor. |
+
+5. Selecciona **Guardar** y espera a que termine el aprovisionamiento.
+6. En **Administrar > Entornos**, confirma que el entorno aparece activo y que tiene Dataverse. Anota el nombre, región y URL para elegirlo después en Copilot Studio.
+7. Continúa con **2. Preparar el acceso web**.
+
+Si el registro está bloqueado, falla o no aparece un entorno, detente y solicita al instructor que te asigne uno. No sustituyas el entorno con el predeterminado, uno personal o uno de producción.
+
+> **Requisitos y límites:** La creación en el Centro de administración requiere los permisos y derechos de licencia correspondientes, capacidad de Dataverse disponible y que la directiva del tenant permita crear entornos. La creación del entorno no asigna automáticamente todos los permisos de Copilot Studio, SharePoint o Power Automate que necesita el curso. Sigue el procedimiento oficial de [crear un entorno con una base de datos](https://learn.microsoft.com/es-es/power-platform/admin/create-environment#create-an-environment-with-a-database).
+
+### Opción B: TI o el instructor proporciona un entorno
+
+El instructor o TI crea/asigna un entorno de capacitación y comunica su nombre, región, URL y permisos. El participante no crea otro; continúa con **2. Preparar el acceso web**.
+
+Los entornos de tipo Prueba suelen tener un ciclo de vida limitado y pueden desactivarse y eliminarse al vencer. Confirma la fecha de expiración y guarda las evidencias fuera del entorno. Consulta [Acerca de los entornos de prueba](https://learn.microsoft.com/es-es/power-platform/admin/trial-environments).
+
+## 2. Preparar el acceso web
 
 1. Actualizar el navegador mediante el mecanismo institucional y registrar su versión.
 2. Utilizar un perfil con la cuenta organizacional del laboratorio.
-3. Abrir [Copilot Studio](https://copilotstudio.microsoft.com), autenticarse y seleccionar el entorno indicado por TI.
+3. Abrir [Copilot Studio](https://copilotstudio.microsoft.com), autenticarse y seleccionar el entorno de prueba asignado por TI o creado con autorización de la organización.
 4. Confirmar nombre y región del entorno. Mantener ese mismo entorno durante todo el curso.
 5. Abrir [Power Automate](https://make.powerautomate.com/) y el sitio de SharePoint asignado con la misma cuenta.
 
-No crear un entorno nuevo con la cuenta del participante como parte del setup. Utilizar el entorno institucional habilitado para la capacitación.
+Usar preferentemente el entorno institucional habilitado para la capacitación. Si la organización autoriza entornos individuales, seguir la [sección 1 de esta guía](#1-crear-o-recibir-el-entorno-de-power-platform) para elegir **Tipo: Prueba**. No crear entornos personales ni usar el entorno predeterminado o de producción como sustituto. Los entornos de tipo Prueba estándar suelen tener un ciclo de vida de 30 días y pueden desactivarse y eliminarse al vencer; planificar el curso dentro de ese periodo y conservar las evidencias fuera del entorno.
 
-## 2. Aprovisionar el entorno de capacitación
+## 3. Aprovisionar los recursos compartidos del entorno
 
-Esta preparación corresponde a TI o al administrador antes de la sesión:
+Esta preparación corresponde preferentemente a TI o al administrador antes de la sesión. Incluso si cada participante crea su propio entorno, la configuración de recursos compartidos, permisos y directivas sigue siendo responsabilidad del instructor o de TI:
 
-1. Seleccionar o crear un entorno activo, con Dataverse, licenciamiento y capacidad adecuados, separado de procesos productivos. Consultar [Crear y administrar entornos](https://learn.microsoft.com/es-es/power-platform/admin/create-environment).
-2. Asignar a los participantes el rol de creador de entorno.
+1. Para un entorno compartido, seleccionar o crear un entorno activo, con Dataverse, licenciamiento y capacidad adecuados, separado de procesos productivos. Para entornos individuales de tipo Prueba, confirmar que el aprovisionamiento terminó y que Dataverse está disponible. Consultar [Crear un entorno con una base de datos](https://learn.microsoft.com/es-es/power-platform/admin/create-environment#create-an-environment-with-a-database) y [Acerca de los entornos de prueba](https://learn.microsoft.com/es-es/power-platform/admin/trial-environments).
+2. En el entorno compartido, asignar a los participantes el rol de creador de entorno. En los entornos individuales, verificar que el usuario puede crear agentes y los componentes que requiere el curso.
 3. Verificar que los participantes pueden crear agentes en Copilot Studio dentro del entorno.
 4. Validar las directivas de datos y los conectores de la ruta común.
 5. Comunicar el entorno y los recursos asignados mediante un registro sin secretos.
 
 No cambiar al entorno predeterminado únicamente para evitar un error de permisos; utilizar el autorizado por el cliente.
 
-## 3. Revisar las directivas de datos
+## 4. Revisar las directivas de datos
 
 1. En el [Centro de administración de Power Platform](https://admin.powerplatform.microsoft.com), revisar las directivas de datos que aplican al entorno de capacitación.
 2. Verificar que los conectores **SharePoint** y **Microsoft Copilot Studio** pertenezcan al mismo grupo y no estén bloqueados.
@@ -136,13 +184,13 @@ No cambiar al entorno predeterminado únicamente para evitar un error de permiso
 
 Consultar [Directivas de datos para agentes](https://learn.microsoft.com/es-es/microsoft-copilot-studio/admin-data-loss-prevention) y [Directivas de prevención de pérdida de datos](https://learn.microsoft.com/es-es/power-platform/admin/wp-data-loss-prevention).
 
-## 4. Preparar el sitio de SharePoint de laboratorio
+## 5. Preparar el sitio de SharePoint de laboratorio
 
 1. Crear un sitio de grupo, por ejemplo `Laboratorio Copilot Studio`.
 2. En la biblioteca **Documentos**, crear la carpeta `Procedimientos` y cargar [assets/procedimientos-solicitudes-ti.docx](assets/procedimientos-solicitudes-ti.docx).
 3. Conceder a los participantes permiso de **Lectura** sobre la biblioteca y de **Edición** sobre la lista del apartado siguiente.
 
-## 5. Crear las conexiones autorizadas
+## 6. Crear las conexiones autorizadas
 
 Las conexiones de SharePoint se crean durante la Práctica 5 con la cuenta de cada participante. Antes del curso, validar con una cuenta equivalente a la de un participante que la conexión puede crearse en el entorno sin solicitudes de autenticación pendientes.
 
