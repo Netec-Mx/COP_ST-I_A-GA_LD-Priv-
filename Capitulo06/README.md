@@ -16,6 +16,17 @@ En esta práctica ejecutas pruebas integrales del agente con escenarios de solic
 
 Finalmente, revisas la autenticación y las conexiones del agente e identificas los ajustes necesarios antes de considerar su publicación o implementación organizacional.
 
+Nota de compatibilidad de interfaz: Copilot Studio puede mostrar los menús con nombres ligeramente diferentes según la versión del tenant. Si la interfaz no coincide exactamente con los pasos, usa la opción equivalente en tu entorno (por ejemplo: Agentes/Agents, Configuración/Settings, Temas/Topics, Herramientas/Tools y Panel de prueba/Test pane). La lógica de la práctica sigue siendo la misma.
+
+### Antes de iniciar la práctica: verificar el entorno
+
+1. Abre [Copilot Studio](https://copilotstudio.microsoft.com) e inicia sesión con la cuenta del curso.
+2. Abre el selector de entorno en la barra superior (normalmente en la esquina superior derecha) y selecciona exactamente `Laboratorio Copilot Studio - <tus iniciales>`, reemplazando el marcador por tus iniciales.
+3. Antes de probar el agente o editar la herramienta, confirma que ese nombre permanece visible en el selector.
+4. Si necesitas abrir Power Automate para simular un error o revisar ejecuciones, verifica también que su selector de entorno muestre `Laboratorio Copilot Studio - <tus iniciales>` antes de editar el flujo.
+
+**Si el entorno no aparece o no puedes seleccionarlo, detente y contacta al instructor o a TI. No continúes en el entorno predeterminado, personal o de producción.**
+
 ## Objetivos de Aprendizaje
 
 - [ ] Ejecutar seis escenarios de prueba de extremo a extremo.
@@ -90,12 +101,13 @@ Abre en pestañas separadas el agente, el flujo, la lista `SolicitudesTI` y la m
 | 3 | Información faltante | Sin correo válido del jefe | Ruta incompleta; no invoca la herramienta |
 | 4 | Sujeta a autorización | TesoNet o permiso de Administración · confirma `Sí` | Registro con estado «Pendiente de autorización» |
 | 5 | Usuario no confirma | Responde `No` en la confirmación | No crea elemento |
+| 6 | Error de registro | Solicitud completa con la lista temporalmente inválida | Muestra el mensaje de error controlado y no expone detalles técnicos |
 
 2. Registra el resultado de cada escenario en la matriz.
 
-**Resultado esperado:** Cinco escenarios ejecutados y registrados.
+**Resultado esperado:** Seis escenarios ejecutados y registrados, incluyendo el caso de error controlado.
 
-**Verificación:** Los escenarios 2 y 4 crean elementos en la lista; los escenarios 1, 3 y 5 no crean ninguno.
+**Verificación:** Los escenarios 2 y 4 crean elementos en la lista; los escenarios 1, 3, 5 y 6 no crean elementos válidos en la lista principal, o bien se validan como error controlado.
 
 ### Paso 3: Simular un error durante el registro
 
