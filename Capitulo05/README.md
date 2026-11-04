@@ -16,6 +16,17 @@ En esta práctica incorporas el flujo de registro como herramienta del agente y 
 
 Además, incorporas una confirmación explícita del usuario antes de registrar la solicitud y configuras las respuestas del agente para comunicar el identificador generado o informar cuando la operación no pueda completarse.
 
+Nota de compatibilidad de interfaz: Copilot Studio puede mostrar los menús con nombres ligeramente diferentes según la versión del tenant. Si la interfaz no coincide exactamente con los pasos, usa la opción equivalente en tu entorno (por ejemplo: Agentes/Agents, Configuración/Settings, Temas/Topics, Herramientas/Tools y Panel de prueba/Test pane). La lógica de la práctica sigue siendo la misma.
+
+### Antes de iniciar la práctica: verificar el entorno
+
+1. Abre [Copilot Studio](https://copilotstudio.microsoft.com) e inicia sesión con la cuenta del curso.
+2. Abre el selector de entorno en la barra superior (normalmente en la esquina superior derecha) y selecciona exactamente `Laboratorio Copilot Studio - <tus iniciales>`, reemplazando el marcador por tus iniciales.
+3. Antes de editar el agente o agregar el flujo como herramienta, confirma que ese nombre permanece visible en el selector.
+4. Si necesitas abrir Power Automate para revisar o editar el flujo, verifica también que su selector de entorno muestre `Laboratorio Copilot Studio - <tus iniciales>`.
+
+**Si el entorno no aparece o no puedes seleccionarlo, detente y contacta al instructor o a TI. No continúes en el entorno predeterminado, personal o de producción.**
+
 ## Objetivos de Aprendizaje
 
 - [ ] Invocar un flujo de agente como herramienta desde un tema.
