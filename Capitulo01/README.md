@@ -16,9 +16,12 @@ Los colaboradores necesitan solicitar servicios internos, como el acceso a una h
 
 En esta primera práctica construyes la base del prototipo: un agente con propósito, alcance, tono y límites definidos, que trabaja con la orquestación clásica. El resultado es el punto de partida obligatorio de todas las prácticas siguientes.
 
+Nota de compatibilidad de interfaz: Copilot Studio puede mostrar los menús con nombres ligeramente diferentes según la versión del tenant. Si la interfaz no coincide exactamente con los pasos, usa la opción equivalente en tu entorno (por ejemplo: Agentes/Agents, Configuración/Settings, Temas/Topics, Herramientas/Tools y Panel de prueba/Test pane). La lógica de la práctica sigue siendo la misma.
+
 ## Objetivos de Aprendizaje
 
-- [ ] Crear un agente en Microsoft Copilot Studio dentro del entorno de capacitación.
+- [ ] Crear o seleccionar un entorno de prueba de Power Platform autorizado.
+- [ ] Crear un agente en Microsoft Copilot Studio dentro del entorno de prueba.
 - [ ] Redactar la descripción del agente a partir de una necesidad empresarial.
 - [ ] Configurar instrucciones con propósito, alcance, tono y límites.
 - [ ] Verificar que el agente use la orquestación clásica.
@@ -34,9 +37,9 @@ En esta primera práctica construyes la base del prototipo: un agente con propó
 
 **Acceso**
 
-- Cuenta organizacional autorizada en el tenant de capacitación.
-- Acceso a Microsoft Copilot Studio con licencia y capacidad para crear agentes.
-- Permisos de creador en el entorno de Power Platform asignado al curso.
+- Cuenta organizacional (trabajo o escuela) autorizada para crear un entorno de prueba en el tenant, o un entorno de prueba asignado por el instructor.
+- Acceso a Microsoft Copilot Studio mediante la licencia del curso o una prueba habilitada por el administrador.
+- Permisos de creador en el entorno de Power Platform.
 - Archivo [assets/instrucciones-agente.txt](../assets/instrucciones-agente.txt) del repositorio.
 - No uses información financiera real, datos personales, credenciales ni identificadores reales.
 
@@ -45,18 +48,20 @@ En esta primera práctica construyes la base del prototipo: un agente con propó
 | Recurso | Versión, edición y arquitectura | Uso |
 |---|---|---|
 | Microsoft Copilot Studio | Servicio SaaS vigente, experiencia clásica (orquestación clásica); arquitectura no aplicable. Fuente oficial: https://learn.microsoft.com/es-es/microsoft-copilot-studio/ | Creación y configuración del agente. |
-| Entorno de Power Platform | Entorno de capacitación asignado por TI; arquitectura no aplicable. Fuente oficial: https://learn.microsoft.com/es-es/power-platform/admin/environments-overview | Ubicación del agente y de sus componentes. |
+| Entorno de Power Platform | Entorno de tipo **Prueba** con Dataverse, creado con autorización y permisos del tenant, o entorno de capacitación asignado por TI; arquitectura no aplicable. Fuente oficial: https://learn.microsoft.com/es-es/power-platform/admin/create-environment#create-an-environment-with-a-database | Ubicación del agente y de sus componentes. |
 | Microsoft Edge | Versión estable vigente, 64 bits, administrada por la organización. Fuente oficial: https://learn.microsoft.com/es-es/deployedge/ | Acceso a los servicios web del laboratorio. |
 
 ### Consideraciones de licencia y configuración
 
-- **Copilot Studio** requiere licencia o capacidad asignada al tenant; el inicio de sesión en Microsoft 365 no basta para crear agentes.
+- Un entorno de Power Platform con **Tipo: Prueba** y la prueba de producto de **Copilot Studio** son cosas distintas. La prueba de Copilot Studio permite crear y probar agentes, pero no publicarlos; no garantiza que puedas crear un entorno de prueba ni reemplaza los permisos, conectores o recursos de SharePoint necesarios en las prácticas posteriores.
+- La creación de entornos de prueba puede estar deshabilitada por la organización. Si no está disponible, solicita al instructor un entorno preparado; no uses un entorno personal, predeterminado o de producción.
+- Los entornos Power Platform de tipo **Prueba** tienen una duración limitada (normalmente 30 días) y pueden desactivarse y eliminarse al vencer. Guarda las evidencias fuera del entorno y confirma con el instructor la fecha de expiración antes de iniciar el curso.
 - La práctica usa la **orquestación clásica**: el agente selecciona los temas por sus frases desencadenadoras. No se activa la orquestación generativa.
 - No se usan herramientas, flujos, conectores ni fuentes de conocimiento en esta práctica.
 
 ### Preparación del espacio de trabajo
 
-No se requieren comandos de consola ni configuraciones locales. Trabaja en el entorno de Power Platform asignado al curso y usa este nombre para el agente:
+No se requieren comandos de consola ni configuraciones locales. Completa la creación o asignación del entorno antes de la sesión siguiendo [SETUP_GUIDE.md, sección 1](../SETUP_GUIDE.md#1-crear-o-recibir-el-entorno-de-power-platform). Si TI autoriza que crees el tuyo, la guía indica elegir **Tipo: Prueba** y agregar una base de datos de Dataverse. El aprovisionamiento puede tardar y no está incluido en los 10 minutos de la práctica. Después, usa este nombre para el agente:
 
 `Agente Solicitudes TI - <tus iniciales>`
 
@@ -64,19 +69,23 @@ Si el instructor ya creó el agente por ti, no crees una copia adicional: edita 
 
 ## Instrucciones Paso a Paso
 
-### Paso 1: Abrir Copilot Studio en el entorno correcto
+### Paso 1: Crear o seleccionar el entorno Prueba y abrir Copilot Studio
 
-**Objetivo:** Asegurar que todos los componentes del curso se creen en el entorno de capacitación.
+**Objetivo:** Crear o seleccionar un entorno de prueba autorizado para el curso y confirmar que Copilot Studio está trabajando en él.
 
 **Instrucciones:**
 
-1. Abre [Copilot Studio](https://copilotstudio.microsoft.com) e inicia sesión con tu cuenta organizacional.
-2. En el selector de entorno (esquina superior derecha), elige el entorno de capacitación indicado por el instructor.
-3. Anota el nombre del entorno; lo usarás durante todo el curso.
+1. Si el instructor ya asignó un entorno, continúa en el paso 4. Si tienes autorización y los permisos necesarios para crearlo, sigue el procedimiento de [SETUP_GUIDE.md, sección 1](../SETUP_GUIDE.md#1-crear-o-recibir-el-entorno-de-power-platform): en el Centro de administración de Power Platform elige **Nuevo**, establece **Tipo: Prueba** y **Agregar un almacén de datos de Dataverse: Sí**.
+2. No selecciones **Prueba (basada en suscripción)**, **Producción**, **Desarrollador** ni **Sandbox**. No vincules pago por uso con Azure ni habilites aplicaciones de Dynamics 365.
+3. Espera a que termine el aprovisionamiento. Si no tienes permisos, la creación está bloqueada o no aparece la opción **Prueba**, solicita al instructor un entorno asignado; no uses uno personal, predeterminado o de producción.
+4. Abre [Copilot Studio](https://copilotstudio.microsoft.com) e inicia sesión con la cuenta organizacional correspondiente.
+5. En el selector de entorno, elige el entorno **Prueba** creado o asignado. Anota su nombre; deberás usarlo durante todo el curso.
 
-**Resultado esperado:** Copilot Studio muestra la página principal dentro del entorno de capacitación.
+**Resultado esperado:** Copilot Studio muestra la página principal dentro del entorno de prueba correcto.
 
-**Verificación:** El selector de entorno muestra el nombre indicado por el instructor y no un entorno personal o de producción.
+**Verificación:** El selector muestra el entorno de prueba asignado o creado y no un entorno personal o de producción. Si no puedes crear o seleccionar el entorno, no continúes con el laboratorio hasta recibir acceso del instructor.
+
+> **Importante:** La prueba de producto de Copilot Studio es distinta del entorno Power Platform de tipo **Prueba**; la licencia de producto permite crear y probar agentes, pero no publicarlos. La creación del entorno con Dataverse requiere permisos, licencia y capacidad disponibles y autorización de la organización. Para las prácticas de SharePoint y flujos, el instructor debe confirmar que están habilitados los permisos y recursos requeridos. Consulta [Obtener acceso a Copilot Studio](https://learn.microsoft.com/es-es/microsoft-copilot-studio/requirements-licensing-subscriptions), [Acerca de los entornos de prueba](https://learn.microsoft.com/es-es/power-platform/admin/trial-environments) y [Crear un entorno con una base de datos](https://learn.microsoft.com/es-es/power-platform/admin/create-environment#create-an-environment-with-a-database).
 
 ### Paso 2: Crear el agente
 
